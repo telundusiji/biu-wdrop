@@ -1,9 +1,11 @@
 package site.teamo.biu.wdrop.server.core;
 
+import org.springframework.util.StreamUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.UUID;
 
 /**
@@ -21,9 +23,12 @@ public class WorkerHandler {
 
     private String pid;
 
+    private boolean destroyed;
+
     private WorkerHandler(String workerId, Process process) {
         this.workerId = workerId;
         this.process = process;
+        this.destroyed = Boolean.FALSE;
     }
 
     public static WorkerHandler create() throws IOException {
@@ -36,9 +41,29 @@ public class WorkerHandler {
         cp += File.pathSeparator + ClassLoader.getSystemResource("").getPath() + "\"";
         String cmd = java + " -cp " + cp + " " + WORKER_APPLICATION_CLASSNAME + " " + workerId + " " + serverName + ":" + port;
         Process process = run.exec(cmd);
-        return new WorkerHandler(workerId,process);
+        return new WorkerHandler(workerId, process);
     }
 
+    public void destroy() throws IOException {
+        if (process.isAlive() || destroyed == Boolean.TRUE) {
+            return;
+        }
+        System.out.println(StreamUtils.copyToString(process.getInputStream(), Charset.forName("UTF-8")));
+        System.out.println(StreamUtils.copyToString(process.getErrorStream(), Charset.forName("UTF-8")));
+        process.destroy();
+        destroyed = Boolean.TRUE;
+    }
+
+    public void destroyForce() throws IOException {
+        if(destroyed==Boolean.TRUE){
+            return;
+        }
+        if (process.isAlive()) {
+            process.destroy();
+        }
+        System.out.println(StreamUtils.copyToString(process.getInputStream(), Charset.forName("UTF-8")));
+        System.out.println(StreamUtils.copyToString(process.getErrorStream(), Charset.forName("UTF-8")));
+    }
 
     public Process getProcess() {
         return process;
@@ -55,5 +80,9 @@ public class WorkerHandler {
     public WorkerHandler setPid(String pid) {
         this.pid = pid;
         return this;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }
