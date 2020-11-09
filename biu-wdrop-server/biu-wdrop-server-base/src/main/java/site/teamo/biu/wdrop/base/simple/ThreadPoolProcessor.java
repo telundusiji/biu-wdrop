@@ -2,7 +2,7 @@ package site.teamo.biu.wdrop.base.simple;
 
 import site.teamo.biu.wdrop.base.Container;
 import site.teamo.biu.wdrop.base.Processor;
-import site.teamo.biu.wdrop.base.conf.v1.Config;
+import site.teamo.biu.wdrop.base.conf.Config;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

@@ -1,4 +1,4 @@
-package site.teamo.biu.wdrop.base.conf.v1;
+package site.teamo.biu.wdrop.base.conf;
 
 import java.util.Optional;
 import java.util.function.Consumer;

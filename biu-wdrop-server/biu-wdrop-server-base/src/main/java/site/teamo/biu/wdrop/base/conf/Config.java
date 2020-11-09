@@ -5,7 +5,6 @@ import site.teamo.biu.wdrop.base.exception.ConfigException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * @author 爱做梦的锤子
@@ -27,26 +26,20 @@ public class Config {
 
     public <T> T getOrElseThrow(ConfigEntry<T> configEntry) {
         if (configEntry == null) {
-            throw new ConfigException("Nonexistent configuration item[" + configEntry.key + "]");
+            throw new ConfigException("Cannot use an empty ConfigEntry to get the configuration content");
         }
-        return configEntry.value(conf).orElseThrow(() -> new ConfigException("[" + configEntry.key + "]=>" + configEntry.doc));
+        return configEntry.value(conf).orElseThrow(() -> new ConfigException("Null config value [" + configEntry.key + "]=>" + configEntry.doc));
     }
 
-    public String getString(ConfigEntry configEntry) {
-        if (configEntry == null) {
-            return null;
-        }
-        return configEntry.valueString(conf);
-    }
 
-    public static Builder builer() {
+    public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
         private Map<ConfigEntry, Object> conf = new HashMap<>();
 
-        public <T> Builder set(ConfigEntry<T> configEntry, T value) {
+        public <T> Builder config(ConfigEntry<T> configEntry, T value) {
             conf.put(configEntry, value);
             return this;
         }

@@ -1,7 +1,6 @@
 package site.teamo.biu.wdrop.base.conf;
 
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -15,12 +14,9 @@ public class ConfigEntryWithDefaultFunction<T> extends ConfigEntry<T> {
 
     public ConfigEntryWithDefaultFunction(String key,
                                           Supplier<T> defaultFunction,
-                                          Function<String, T> valueConverter,
-                                          Function<T, String> stringConverter,
                                           String doc,
-                                          boolean isPublic,
                                           Optional<Predicate<Optional<T>>> validate) {
-        super(key, valueConverter, stringConverter, doc, isPublic,validate);
+        super(key, doc,validate);
         this.defaultFunction = defaultFunction;
     }
 
@@ -33,12 +29,4 @@ public class ConfigEntryWithDefaultFunction<T> extends ConfigEntry<T> {
         return Optional.ofNullable(defaultFunction.get());
     }
 
-    /**
-     * 获取配置的默认值并转换成String类型
-     *
-     * @return
-     */
-    public String defaultValueString() {
-        return stringConverter.apply(defaultFunction.get());
-    }
 }

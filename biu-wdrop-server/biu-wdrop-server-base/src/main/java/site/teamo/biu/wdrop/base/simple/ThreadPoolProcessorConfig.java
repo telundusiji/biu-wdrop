@@ -2,9 +2,8 @@ package site.teamo.biu.wdrop.base.simple;
 
 import lombok.extern.slf4j.Slf4j;
 import site.teamo.biu.wdrop.base.Container;
-import site.teamo.biu.wdrop.base.conf.v1.Config;
-import site.teamo.biu.wdrop.base.conf.v1.ConfigEntry;
-import site.teamo.biu.wdrop.base.conf.v1.ConfigEntryBuilder;
+import site.teamo.biu.wdrop.base.conf.ConfigEntry;
+import site.teamo.biu.wdrop.base.conf.ConfigEntryBuilder;
 
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;

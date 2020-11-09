@@ -1,7 +1,7 @@
 package site.teamo.biu.wdrop.base;
 
 
-import site.teamo.biu.wdrop.base.conf.v1.Config;
+import site.teamo.biu.wdrop.base.conf.Config;
 
 import java.util.List;
 
