@@ -85,6 +85,11 @@
                 <artifactId>biu-wdrop-server-worker</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>site.teamo.biu</groupId>
+                <artifactId>biu-wdrop-server-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -132,5 +137,18 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://te-amo.site:9021/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://te-amo.site:9021/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

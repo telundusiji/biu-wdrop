@@ -29,6 +29,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>site.teamo.biu</groupId>
+            <artifactId>biu-wdrop-server-base</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
